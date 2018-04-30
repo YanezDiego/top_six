@@ -1,3 +1,4 @@
 #!usr/bin/env ruby
+require './lib/top_six'
 
-puts "Hey Diego"
+TopSix::CLI.new.call
