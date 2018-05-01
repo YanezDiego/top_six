@@ -1,0 +1,4 @@
+class TopSix::Scraper
+
+
+end
