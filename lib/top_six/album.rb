@@ -1,0 +1,8 @@
+class TopSix::Album
+
+
+
+
+
+
+end
