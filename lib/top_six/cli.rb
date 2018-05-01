@@ -3,7 +3,7 @@
 class TopSix::CLI
 
   def call
-    puts "Welcome to top 6!"
+    puts "---Welcome to top 6---!"
     top_albums
     menu
     goodbye
@@ -11,6 +11,7 @@ class TopSix::CLI
 
   def top_albums
     puts "------TOP ALBUMS-----------"
+    @albums = TopSix::Album
     puts "1. Teen Spirit - Nirvana - Grunge\n2. Care For Me - Saba - rap"
   end
 
