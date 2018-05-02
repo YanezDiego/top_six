@@ -1,0 +1,6 @@
+class TopSix::Review
+
+
+
+
+end
