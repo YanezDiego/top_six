@@ -1,13 +1,21 @@
 class TopSix::Album
-  attr_accessor :title, :artist, :genre, :rating, :review
+  attr_accessor :album, :title, :artist, :genre, :rating, :review, :link
 
-    def self.best_new
-      # gather scraped album information from Pitchfork list and returns the data needed.
-      #Artist, Tittle, and Genre #puts"#{albums(:title[0])} - #{albums(:artist[0])} - #{albums(:genre[0])}"
+  @@albums = []
+
+    def initialize
 
     end
 
-    def self.review
+    def self.all
+      @@albums
+    end
+
+    def save
+      @@albums << self
+    end
+
+    def review
       #returns the review snippet & rating of the corresponding album from second page
     end
 
