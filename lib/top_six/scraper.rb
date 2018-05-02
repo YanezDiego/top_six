@@ -6,14 +6,20 @@ class TopSix::Scraper
       albums = []
 
       doc.css('section#best-new-albums div.bnm-small.album-small').each do |album|
+        album_review_link = album.css("a.link-block").attribute("href").value
         album_title = album.css("h2.title").text
         album_artist = album.css('ul.artist-list li').text
         album_genre = album.css('a.genre-list__link').text
-        binding.pry
-        albums << {title: album_title, artist: album_artist, genre: album_genre}
+        albums << {title: album_title, artist: album_artist, genre: album_genre, url:album_review_link}
       end
+      binding.pry
       albums
     end
+
+    def self.scrape_review
+     #when doc = Nokogiri::HTML(open()) scrapes the review HTML
+    end
+
 end
 
 
