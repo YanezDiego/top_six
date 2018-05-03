@@ -17,6 +17,9 @@ class TopSix::Album
 
     def review
       #returns the review snippet & rating of the corresponding album from second page
+      TopSix::Review.all.each do |i|
+        @@albums << i
+      end
     end
 
 
