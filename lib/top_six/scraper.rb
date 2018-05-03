@@ -16,21 +16,28 @@ class TopSix::Scraper
         a.genre = album.css('a.genre-list__link').text
         a.save
       end
-
       TopSix::Album.all
     end
 
     def self.get_review(input)
-      doc = Nokogiri::HTML(open("http://www.pitchfork.com#{TopSix::Album.all[input - 1].link}")) #scrapes the review HTML
+      doc = Nokogiri::HTML(open("http://www.pitchfork.com#{TopSix::Album.all[input.to_i - 1].link}")) #scrapes the review HTML
+
+      doc.css("div.review-detail"). each do |review|
+        r = TopSix::Review.new
+        r.rating = review.css("div.score-circle span.score").text
+        r.review = review.css("div.review-detail__abstract p").text
+        r.save
+      end
+      TopSix::Review.all
     end
 
-    def self.scrape_review
-      doc
-    end
 
 end
 
-#TopSix::Scraper.scrape_review
+#TopSix::Scraper.get_review
 #TopSix::Scraper.scrape_top_album_page
+
+#doc.css("div.review-detail").css("div.score-circle span.score").text #<-score
+#doc.css("div.review-detail").css("div.review-detail__abstract p").text #<- review
 
 #doc = Nokogiri::HTML(open("http://www.pitchfork.com#{TopSix::Album.all[input - 1].link}"))
