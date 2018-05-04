@@ -21,7 +21,7 @@ class TopSix::Scraper
     end
 
     def self.get_review(input)
-      doc = Nokogiri::HTML(open("http://www.pitchfork.com#{TopSix::Album.all[input.to_i - 1].link}")) #scrapes the review HTML
+      doc = Nokogiri::HTML(open("http://www.pitchfork.com#{TopSix::Album.all[input].link}")) #scrapes the review HTML
 
       TopSix::Review.reset
       doc.css("div.review-detail"). each do |review|
@@ -36,6 +36,9 @@ class TopSix::Scraper
 
 end
 
+
+
+#.to_i - 1
 #TopSix::Scraper.get_review
 #TopSix::Scraper.scrape_top_album_page
 
