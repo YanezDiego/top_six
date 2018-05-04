@@ -3,41 +3,59 @@
 class TopSix::CLI
 
   def call
-    puts "---Welcome to top 6---!"
-    top_albums
-    # menu
-    # goodbye
-  end
-
-  def top_albums
-    puts "------TOP ALBUMS-----------"
-    TopSix::Scraper.scrape_top_album_page.each_with_index do |album, i|
-      puts "#{i + 1}. #{album.artist} - #{album.title} - #{album.genre} - #{album.link}"#<- list the albums with artist and genre that are reviewed
-    end
-
+    system('clear')
+    puts "---Welcome to top 6!---"
     menu
   end
 
   def menu
-    puts "Pick using your keyboard to get more information about the album"
+    puts "Tell me your choice: 'l'ist albums, 'e'xit"
+      user = gets.strip.downcase
+      case user
+        when "l"
+          top_albums
+        when "e"
+          goodbye
+        else
+          puts "please make a correct slection."
+          menu
+        end
+    end
 
-    input = ''
-    while input != "exit"
-      puts "-----------------"
-      puts "Please enter 1-6 to see more details.\nType'list' to see the list again.\nType 'exit' to exit"
-      input = gets.strip.downcase
-      case input
-      when "1"
-        puts 'Nirvana abstrackt review'
-        puts 'Rating: 8.6'
-      when "2"
-        puts 'Saba abstrackt review'
-        puts "Rating: 9.1"
-      when "list"
-        top_albums
-      else
-        puts "Please make a right choice"
+  def top_albums
+    system('clear')
+    puts "   Top Albums"
+    TopSix::Scraper.scrape_top_album_page.each_with_index do |album, i|
+      puts "#{i + 1}. #{album.artist} - #{album.title.gsub("â", "")} - #{album.genre}"#<- list the albums with artist and genre that are reviewed
+    end
+    show_review
+    again?
+  end
+
+  def show_review
+    puts "Please choose from 1 to 6 to select which album you would like to see the review from."
+    input = gets.strip.to_i
+    if input <= 6
+    TopSix::Scraper.get_review(input - 1).each do |album|
+      puts "#{album.review}"
+      puts "Score: #{album.rating}"
       end
+    else
+      puts "Wrong selection. Please try again"
+      show_review
+    end
+  end
+
+  def again?
+    puts "Would you like to see the list again 'y'es 'n'o."
+    input = gets.strip.downcase
+    if input == 'y'
+      menu
+    elsif input == 'n' || input == 'exit'
+      goodbye
+    else
+      puts "Please make the right selection"
+      again?
     end
   end
 
@@ -47,3 +65,6 @@ class TopSix::CLI
 
 
 end
+
+
+ #{album.link}
