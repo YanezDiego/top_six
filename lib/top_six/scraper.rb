@@ -8,6 +8,7 @@ class TopSix::Scraper
     def self.scrape_top_album_page
       doc = Nokogiri::HTML(open("https://pitchfork.com/best"))
 
+      TopSix::Album.reset
       doc.css('section#best-new-albums div.bnm-small.album-small').each do |album|
         a = TopSix::Album.new
         a.link = album.css("a.link-block").attribute("href").value
@@ -22,6 +23,7 @@ class TopSix::Scraper
     def self.get_review(input)
       doc = Nokogiri::HTML(open("http://www.pitchfork.com#{TopSix::Album.all[input.to_i - 1].link}")) #scrapes the review HTML
 
+      TopSix::Review.reset
       doc.css("div.review-detail"). each do |review|
         r = TopSix::Review.new
         r.rating = review.css("div.score-circle span.score").text
