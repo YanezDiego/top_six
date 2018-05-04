@@ -15,4 +15,8 @@ class TopSix::Review
       @@reviews << self
     end
 
+    def self.reset
+      @@reviews.clear
+    end
+
 end

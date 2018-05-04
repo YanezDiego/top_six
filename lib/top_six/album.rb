@@ -15,13 +15,15 @@ class TopSix::Album
       @@albums << self
     end
 
+    def self.reset
+      @@albums.clear
+    end
+
     def review
       #returns the review snippet & rating of the corresponding album from second page
       TopSix::Review.all.each do |i|
         @@albums << i
       end
     end
-
-
 
 end
