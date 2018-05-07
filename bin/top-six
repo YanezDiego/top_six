@@ -1,4 +1,5 @@
 #!usr/bin/env ruby
-require './lib/top_six'
+
+require_relative '../lib/top_six'
 
 TopSix::CLI.new.call
