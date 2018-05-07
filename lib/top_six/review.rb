@@ -1,7 +1,7 @@
 class TopSix::Review
   attr_accessor :rating, :review
 
-@@reviews = []
+  @@reviews = []
 
     def initialize
 
