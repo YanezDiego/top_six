@@ -35,7 +35,7 @@ class TopSix::CLI
   def show_review
     puts "Please choose from 1 to 6 to select which album you would like to see the review from."
     input = gets.strip.to_i
-    if input <= 6
+    if input.between?(1,6)
     TopSix::Scraper.get_review(input - 1).each do |album|
       puts "#{album.review}"
       puts "Score: #{album.rating}"
